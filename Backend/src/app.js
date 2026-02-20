@@ -17,7 +17,10 @@ app.use(express.urlencoded({limit:"10kb", extended:true}))
 // app.use(path,imported router)
 
 import userRouter from './routes/user.router.js'
+import productRouter from './routes/product.router.js'
+
 app.use("/api/users",userRouter)
+app.use("/api/products",productRouter)
 
 
 export default app;
