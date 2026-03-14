@@ -15,6 +15,10 @@ const productSchema = new Schema(
         type:String,
         required:true,
     },
+    // owner:{
+    //   type:mongoose.Types.ObjectId,
+    //   ref:"User"
+    // }
   },
   { timestamps: true }
 );

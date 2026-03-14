@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@tailwind utilities;
+#root {
+  max-width: 1080px;
+  margin-inline: auto;
+  margin-bottom: 10px;
+  /* text-align: center; */
+}
+
+@media (max-width:1035px) {
+  #root {
+  max-width: 876px;
+ 
+}
+}
+
+@media (max-width:950px) {
+  #root {
+ margin-inline: 38px;
+ 
+}
+}
+

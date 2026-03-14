@@ -22,6 +22,7 @@ export const uploadProduct = async (req, res, next) => {
       name,
       price,
       image,
+      // owner:req.user._id
     });
 
     // consoling for getting know
@@ -59,11 +60,23 @@ export const getProducts = async (req,res,next) =>{
     }
 }
 
+export const getSingleProduct = async (req,res,next) =>{
+  try {
+const {productId} = req.params;
+  const product = await Product.findById(productId);
+        return res.status(200).json(new ApiResponse(200,product,"Fetched product"))
+    
+    
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const updateProduct = async (req,res,next) => {
     try {
         const {productId} = req.params;
-        const {price} = req.body;
-        const product = await Product.findByIdAndUpdate(productId,{price},{returnDocument:'after'});
+        const {name} = req.body;
+        const product = await Product.findByIdAndUpdate(productId,{name},{returnDocument:'after'});
         console.log(product)
         return res.status(200).json(new ApiResponse(200,{},"Updated price"))
     

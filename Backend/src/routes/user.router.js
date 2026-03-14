@@ -1,4 +1,17 @@
 import express from 'express'
+import { loginUser, logoutUser, refreshAccessToken, registerUser } from '../controllers/user.controller.js';
+import { verifyJWTToken } from '../middleware/auth.middleware.js';
+
+
 const router = express.Router();
+
+
+router.post("/register",registerUser)
+router.get("/login",loginUser)
+router.get("/logout",verifyJWTToken,logoutUser)
+router.post("/refresh-token",refreshAccessToken)
+
+
+
 
 export default router
