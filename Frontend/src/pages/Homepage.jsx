@@ -1,11 +1,11 @@
 import React from 'react';
-
-import ProductCatlogue from './ProductCatlogue';
+import ProductCatlogue from '../components/ProductCatlogue';
 import { FaRocket } from 'react-icons/fa6';
+import Wrapper from '../components/Wrapper';
 
 const Homepage = () => {
     return (
-       <section className='mt-28'>
+      <Wrapper>
        {/* display products cards */}
         <div className="flex flex-row items-center gap-x-1.5 justify-center">
                <h1 className="text-blue-800 text-2xl font-extrabold">
@@ -14,7 +14,7 @@ const Homepage = () => {
                <FaRocket className="text-blue-800 text-2xl" />
              </div>
        <ProductCatlogue/>
-       </section>
+    </Wrapper>
     );
 }
 

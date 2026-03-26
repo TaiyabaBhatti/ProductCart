@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getProducts} from "../api/productApi";
 
 const ProductCatlogue = () => {
 
@@ -14,7 +15,7 @@ const ProductCatlogue = () => {
      const getAllProducts = async ()=>{
     setLoading(true)
     try {
-const response = await axios.get('/api/products/get-products',{})
+const response = await getProducts()
 console.log(response.data.data)
 setProducts(response.data.data)
       

@@ -25,11 +25,11 @@ app.use("/api/users",userRouter)
 app.use("/api/products",productRouter)
 
 
-// app.use((err, req, res, next) => {
-//   res.status(err.statusCode || 500).json({
-//     message: err.message
-//   });
-// });
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).json({
+    message: err.message
+  });
+});
 
 export default app;
 

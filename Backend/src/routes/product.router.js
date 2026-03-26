@@ -2,10 +2,7 @@ import express from 'express'
 import { deleteProduct, getProducts, getSingleProduct, updateProduct, uploadProduct } from '../controllers/product.controller.js';
 import { verifyJWTToken } from '../middleware/auth.middleware.js';
 
-
-
 const router = express.Router();
-
 
 router.post("/upload-product",uploadProduct)
 router.delete("/delete-product/:productId",deleteProduct)
