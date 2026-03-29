@@ -27,7 +27,7 @@ const Register = () => {
         reset()
         navigate("/login")
     } catch (error) {
-      setErrorDesc(`${error.response.data.message} ${error.status}` )
+      setErrorDesc(`${error.response?.data?.message} ${error?.status || "Something went wrong"}` )
     }
     finally{
         setLoading(false)
@@ -72,7 +72,7 @@ const Register = () => {
               <InputField
                 labelFor={"fullname"}
                 message={"fullname address is required"}
-                type={"fullname"}
+                type={"text"}
                 placeholder={"Full Name"}
                 register={register}
                 errors={errors}

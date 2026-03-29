@@ -7,8 +7,11 @@ const router = express.Router();
 
 
 router.post("/register",registerUser)
-router.post("/login",loginUser)
+router.post("/login",verifyJWTToken,loginUser)
 router.get("/logout",verifyJWTToken,logoutUser)
 router.post("/refresh-token",refreshAccessToken)
+router.get("/verify-token",verifyJWTToken,(req,res)=>{
+res.status(200).json({user:req.user})
+})
 
 export default router

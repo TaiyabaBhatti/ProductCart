@@ -134,3 +134,18 @@ res.status(200).cookie("accessToken",accessToken,options).cookie("refreshToken",
     next(error)
   }
 }
+
+// verify Token 
+export const verifyToken = async (req,res,next) => {
+
+try{
+
+}
+catch(error){
+next(error)
+}
+
+
+
+
+}

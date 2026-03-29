@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form";
 import Wrapper from "../components/Wrapper";
 import InputField from "../components/InputField";
 import LoadingEffect from "../components/LoadingEffect";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { loginUser } from "../api/authApi";
 import InputErrors from "../components/InputErrors";
 import { useNavigate } from "react-router-dom";
 import ErrorNotif from "../components/ErrorNotif";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const {
@@ -15,16 +16,18 @@ const Login = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const {currUser,setCurrUser,setLoginStatus,loginStatus} = useContext(AuthContext);
    const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
   const [errordesc, setErrorDesc] = useState("");
    const login = async(data) => {
-
     try {
     setLoading(true)
         const res =await loginUser(data)
          reset()
-        console.log("Login Success")
+        console.log("Login Success",)
+        setCurrUser(res.data.data)
+        setLoginStatus(true)
         navigate("/");
     } catch (error) {
       setErrorDesc(`${error.response.data.message} ${error.status}` )

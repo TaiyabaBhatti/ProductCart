@@ -3,9 +3,8 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { FaRegSun } from "react-icons/fa6";
 import { FaCartShopping } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
-import ProfileIcon from "./ProfileIcon";
-
-
+import ProfileIcon from "./AccountBlock";
+import AccountBlock from "./AccountBlock";
  const Navbar = () => {
   return (
     <>
@@ -21,7 +20,7 @@ import ProfileIcon from "./ProfileIcon";
             {/* toggle theme icon */}
             <button className="bg-gray-300 px-4 py-2 rounded-xs"><FaRegSun className="text-2xl"/></button>
             {/* profile icon */}
-            <ProfileIcon/>
+            <AccountBlock/>
           </div>
         </nav>
       </header>

@@ -6,10 +6,10 @@ export const generateAccessAndRefreshTokens = async (userId) => {
     const user = await User.findById(userId);
     const accessToken = await user.generateAccessToken();
     const refreshToken = await user.generateRefreshToken();
-
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
-    //     console.log(`Access token: ${accessToken}, Refresh Token: ${refreshToken}`)
+  
+    // console.log(`Access token: ${accessToken}, Refresh Token: ${refreshToken}`)
  
 return {accessToken, refreshToken}
 } catch (error) {

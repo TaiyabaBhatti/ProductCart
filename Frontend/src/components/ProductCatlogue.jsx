@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getProducts} from "../api/productApi";
+import { AuthContext } from "../context/AuthContext";
+
 
 const ProductCatlogue = () => {
 
    const [loading, setLoading] = useState(true);
+   const {loginStatus} = useContext(AuthContext)
+   
    const [products,setProducts] = useState([]);
    const navigate = useNavigate();
   
@@ -26,7 +30,13 @@ setProducts(response.data.data)
 setLoading(false)
     }
    }
-     getAllProducts();
+   if(loginStatus){
+  getAllProducts();
+   }
+   else{
+    setLoading(false)
+   }
+   
    },[])
 
 const deleteProduct = async (productId) => {
