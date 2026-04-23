@@ -2,11 +2,15 @@ import mongoose from "mongoose";
 import ApiError from "../utils/ApiError.class.js";
 import ApiResponse from "../utils/ApiResponse.class.js";
 import { Product } from "../modles/product.model.js";
+import { formatProductName } from "../utils/formatData.js";
 
 export const uploadProduct = async (req, res, next) => {
   try {
+    
     const { name, price, image } = req.body;
+   
     if ([name, price, image].some((field) => !field)) {
+     
       throw new ApiError(400, "All fields are required");
     }
 
@@ -19,10 +23,10 @@ export const uploadProduct = async (req, res, next) => {
 
     // creatin product - save it - also returned saved data
     const productInDatabase = await Product.create({
-      name,
+      name:formatProductName(name),
       price,
       image,
-      // owner:req.user._id
+      owner:req.user._id
     });
 
     // consoling for getting know
@@ -53,7 +57,7 @@ export const deleteProduct = async (req,res,next) => {
 
 export const getProducts = async (req,res,next) =>{
     try {
-        const products = await Product.find({});
+        const products = await Product.find().populate("owner","-password -refreshToken ");
         return res.status(200).json(new ApiResponse(200,products,"Fetched all products"))
     } catch (error) {
         next(error)

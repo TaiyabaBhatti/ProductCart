@@ -11,6 +11,7 @@ import {
   updateProduct,
 } from "../api/productApi.js";
 import Wrapper from "../components/Wrapper.jsx";
+import ProductPanelActions from "../components/ProductPanelActions..jsx";
 
 const CreateProduct = () => {
   const {
@@ -21,6 +22,7 @@ const CreateProduct = () => {
   } = useForm();
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({});
+  const [showForm,setShowForm] = useState(true)
   const { productId } = useParams();
   const navigate = useNavigate();
   const fomrStatus = productId ? "Update Product" : "Add Product";
@@ -46,13 +48,17 @@ const CreateProduct = () => {
   const createProduct = async (data) => {
     setLoading(true);
     try {
-      console.log(data);
+      
       const response = await uploadProduct(data);
+      setShowForm(false)
+      console.log(response.data)
       reset();
     } catch (error) {
       console.log(error);
+      setShowForm(true)
     } finally {
       setLoading(false);
+     
     }
   };
   const editProduct = async (data) => {
@@ -78,8 +84,9 @@ const CreateProduct = () => {
           {productId ? "Upadte Product" : "Create New Product"}
         </h1>
       </div>
-
-      <div
+{
+  showForm ?
+   <div
         className={`relative mt-10  ${
           productId ? "bg-green-900" : "bg-blue-900"
         } rounded-md p-5 max-w-2xl mx-auto`}
@@ -132,7 +139,10 @@ const CreateProduct = () => {
           />
         </form>
         {loading && <LoadingEffect text={productId ? "Updating" : "Adding"} />}
-      </div>
+      </div> :
+      <ProductPanelActions setShowForm={setShowForm}/>
+}
+     
     </Wrapper>
   );
 };

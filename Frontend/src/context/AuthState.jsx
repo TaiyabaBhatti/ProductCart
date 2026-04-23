@@ -14,18 +14,24 @@ const AuthState = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
 useEffect(()=>{
-    
-    const checkJwtToken = async () =>{
+  setLoading(true)
+  const checkJwtToken = async () =>{
        
 try {
   const res = await verifyToken(); 
-  console.log(res.data.user) 
   setCurrUser(res.data.user)
+  console.log(currUser)
   setLoginStatus(true)
+  setLoading(false)
 
 } catch (error) {
 // NotificationPopup(error,"error")
-
+if(error.response?.status === 401){
+//This is Expected no need to console ->  console.log(`Expected Error: ${error.response.statusText} || ${error.message}`)
+} 
+else {
+  console.log(`UnExpected Error: ${error.message}`)
+}
   setCurrUser(null)
   setLoginStatus(false)
  
@@ -33,12 +39,13 @@ try {
     }
 
 checkJwtToken()
-},[])
+},[loginStatus])
   return (
     <AuthContext.Provider
       value={{
         currUser,
         globalMessage,
+        loading,
         setGlobalMessage,
         setCurrUser,
         setLoginStatus,

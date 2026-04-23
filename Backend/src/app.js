@@ -29,7 +29,7 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({
     message: err.message
   });
-  console.log("Hello World when its comes ")
+ 
 });
 
 export default app;

@@ -19,7 +19,6 @@ export const verifyJWTToken = async (req, _, next) => {
     if (!user) {
       throw new ApiError(401, "Invalid Token");
     }
-
     req.user = user;
     next();
   } catch (error) {

@@ -5,7 +5,6 @@ const productSchema = new Schema(
       type: String,
       required: true,
       unique:true,
-      lowercase:true
     },
     price: {
         type:String,
@@ -15,10 +14,10 @@ const productSchema = new Schema(
         type:String,
         required:true,
     },
-    // owner:{
-    //   type:mongoose.Types.ObjectId,
-    //   ref:"User"
-    // }
+    owner:{
+      type:mongoose.Types.ObjectId,
+      ref:"User"
+    }
   },
   { timestamps: true }
 );
