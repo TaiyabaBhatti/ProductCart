@@ -39,7 +39,8 @@ const Register = () => {
       <Wrapper>
         {/* display header*/}
         <div className="flex flex-row items-center gap-x-1.5 justify-center">
-          <div><h1 className="text-gray-600 text-center text-3xl font-extrabold">Register</h1>
+          <div>
+            <h1 className="text-gray-600 text-center text-3xl font-extrabold">Register</h1>
         {errordesc && <ErrorNotif text={errordesc}/>}</div>
         </div>
 

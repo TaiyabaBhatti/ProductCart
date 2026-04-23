@@ -12,6 +12,7 @@ import {
 } from "../api/productApi.js";
 import Wrapper from "../components/Wrapper.jsx";
 import ProductPanelActions from "../components/ProductPanelActions..jsx";
+import ErrorNotif from "../components/ErrorNotif.jsx";
 
 const CreateProduct = () => {
   const {
@@ -23,6 +24,7 @@ const CreateProduct = () => {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({});
   const [showForm,setShowForm] = useState(true)
+   const [errordesc, setErrorDesc] = useState("");
   const { productId } = useParams();
   const navigate = useNavigate();
   const fomrStatus = productId ? "Update Product" : "Add Product";
@@ -31,7 +33,7 @@ const CreateProduct = () => {
       try {
         const res = await getSingleProduct(productId);
         const data = res.data.data;
-        console.log(res);
+       
         reset({
           name: data.name,
           price: data.price,
@@ -51,10 +53,10 @@ const CreateProduct = () => {
       
       const response = await uploadProduct(data);
       setShowForm(false)
-      console.log(response.data)
+      
       reset();
     } catch (error) {
-      console.log(error);
+      setErrorDesc(`${error.response?.data?.message} ${error?.status || "Something went wrong"}` )
       setShowForm(true)
     } finally {
       setLoading(false);
@@ -64,13 +66,13 @@ const CreateProduct = () => {
   const editProduct = async (data) => {
     setLoading(true);
     try {
-      console.log(data);
+    
       const response = await updateProduct(productId, data);
       console.log("Updated Successfully");
       reset();
       navigate("/");
     } catch (error) {
-      console.log(error);
+      
     } finally {
       setLoading(false);
     }
@@ -79,10 +81,11 @@ const CreateProduct = () => {
   return (
     <Wrapper>
       {/* display products header*/}
-      <div className="flex flex-row items-center gap-x-1.5 justify-center">
+      <div className=" text-center gap-x-1.5 justify-center">
         <h1 className="text-gray-600 text-3xl font-extrabold">
           {productId ? "Upadte Product" : "Create New Product"}
         </h1>
+        {errordesc && <ErrorNotif text={errordesc}/>}
       </div>
 {
   showForm ?

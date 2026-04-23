@@ -17,7 +17,9 @@ export const uploadProduct = async (req, res, next) => {
     // already existed product
 
     const existedProduct = await Product.findOne({ name });
+  
     if (existedProduct) {
+      
       throw new ApiError(400, "Product with that name already exist.");
     }
 
@@ -79,10 +81,14 @@ const {productId} = req.params;
 export const updateProduct = async (req,res,next) => {
     try {
         const {productId} = req.params;
-        const {name} = req.body;
-        const product = await Product.findByIdAndUpdate(productId,{name},{returnDocument:'after'});
+        const updateData = {};
+        const {name,price,image} = req.body;
+        if(name) updateData.name = name;
+        if(price) updateData.price = price;
+        if(image) updateData.image = image;
+        const product = await Product.findByIdAndUpdate(productId,updateData,{returnDocument:'after'});
         console.log(product)
-        return res.status(200).json(new ApiResponse(200,{},"Updated price"))
+        return res.status(200).json(new ApiResponse(200,{},"Updated the following data, ",updateData))
     
     } catch (error) {
         next(error)
