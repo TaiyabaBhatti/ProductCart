@@ -14,7 +14,7 @@ export const uploadProduct = async (req, res, next) => {
       throw new ApiError(400, "All fields are required");
     }
 
-    // already existed product
+    // already existed products
 
     const existedProduct = await Product.findOne({ name });
   
